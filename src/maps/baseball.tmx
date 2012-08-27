@@ -23,13 +23,6 @@
  </layer>
  <objectgroup name="nodes" width="19" height="11">
   <object type="entrance" x="65" y="196" width="28" height="44"/>
-  <object type="door" x="-20" y="163" width="27" height="78">
-   <properties>
-    <property name="instant" value="true"/>
-    <property name="level" value="greendale-exterior"/>
-    <property name="reenter" value="true"/>
-   </properties>
-  </object>
   <object type="cornelius_head" x="314" y="14" width="90" height="139"/>
   <object type="baseball" x="283" y="86" width="11" height="10">
    <properties>

@@ -16,6 +16,7 @@ function Cornelius.new(node, collider)
 	cornelius.node = node
     cornelius.x = node.x
     cornelius.y = node.y
+    cornelius.y_bob = 0
 	cornelius.width = node.width
 	cornelius.height = node.height
     cornelius.bb = collider:addRectangle(node.x, node.y, node.width, node.height)

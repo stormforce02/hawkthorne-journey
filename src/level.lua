@@ -48,8 +48,8 @@ end
 
 -- Return the default Abed character
 function defaultCharacter()
-    local abed = require 'characters/abed'
-    return abed.new(love.graphics.newImage('images/abed.png'))
+    local abed = require 'characters/pierce'
+    return abed.new(love.graphics.newImage('images/pierce.png'))
 end
 
 
@@ -308,11 +308,6 @@ function Level:keypressed(key)
         if node.player_touched and node.keypressed then
             node:keypressed(key, self.player)
         end
-    end
-
-    if key == 'escape' and self.player.state ~= 'dead' then
-        Gamestate.switch('pause')
-        return
     end
 end
 
