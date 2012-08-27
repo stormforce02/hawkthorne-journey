@@ -4,7 +4,7 @@ local window = require 'window'
 local state = Gamestate.new()
 
 local home = require 'menu'
-local nextState = 'home'
+local nextState = 'baseball'
 
 function state:init()
     state.finished = false
