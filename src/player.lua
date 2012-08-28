@@ -4,6 +4,7 @@ local Helper = require 'helper'
 local window = require 'window'
 local cheat = require 'cheat'
 local sound = require 'vendor/TEsound'
+local scoreboard = require 'scoreboard'
 
 local game = {}
 game.step = 10000
@@ -27,6 +28,8 @@ for i=6,0,-1 do
 end
 
 local health = love.graphics.newImage('images/damage.png')
+local happyImage = love.graphics.newImage('images/pierce_happy.png')
+happyImage:setFilter('nearest', 'nearest')
 
 local Player = {}
 Player.__index = Player
@@ -145,6 +148,10 @@ end
 -- @param dt The time delta
 -- @return nil
 function Player:update(dt)
+    if scoreboard.score >= 4000 and self.sheet ~= happyImage then
+        self.sheet = happyImage
+    end
+    
     if self.freeze then
         return
     end

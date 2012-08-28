@@ -3,6 +3,7 @@ local anim8 = require 'vendor/anim8'
 local Timer = require 'vendor/timer'
 local sound = require 'vendor/TEsound'
 local window = require 'window'
+local scoreboard = require 'scoreboard'
 
 local Cornelius = {}
 Cornelius.__index = Cornelius
@@ -30,8 +31,6 @@ function Cornelius.new(node, collider)
 	cornelius.x_offset = 30
 	cornelius.y_offset = 20
 	cornelius.hittable = true
-
-	cornelius.score = 0
 	
     return cornelius
 end
@@ -53,7 +52,7 @@ function Cornelius:collide( node, dt, mtv_x, mtv_y)
 		end
 		--prevent multiple messages
 		if self.hittable then
-			self.score = self.score + 1000
+			scoreboard.score = scoreboard.score + 1000
 			self.state = 'talking'
 			sound.playSfx('audio/cornelius_thats_my_boy.ogg')
 			Timer.add( .8, function()
@@ -79,7 +78,7 @@ end
 
 function Cornelius:draw()
     self:animation():draw( image, self.x - self.x_offset, self.y - self.y_offset + self.y_bob )
-	love.graphics.print( self.score, window.width - 40, window.height - 40, 0, 0.5 )
+	love.graphics.print( scoreboard.score, window.width - 40, window.height - 40, 0, 0.5 )
 end
 
 function Cornelius:keypressed(key, player)
