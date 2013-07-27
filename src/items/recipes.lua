@@ -10,6 +10,11 @@ return {
         { type='material', name='rock' },
         { type='weapon', name='throwingknife' },
     },
+	{
+        { type='material', name='paper' },
+		 { type='material', name='rock' },
+        { type='consumable', name='note' },
+    },
     {
         { type='material', name='ember' },
         { type='material', name='leaf' },

@@ -7,7 +7,7 @@ function love.conf(t)
     t.screen.width      = 1056
     t.screen.height     = 672
     t.screen.fullscreen = false
-    t.console           = false
+    t.console           = true
     t.modules.physics   = false
     t.modules.joystick  = false
     t.release           = false
