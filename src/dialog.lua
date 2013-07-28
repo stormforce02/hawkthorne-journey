@@ -8,10 +8,11 @@ Dialog.__index = Dialog
 
 Dialog.currentDialog = nil
 
-function Dialog.new(message, callback, drawable)
+function Dialog.new(message, callback, drawable,  getInput)
   local d = Dialog.create(message)
   d:reposition()
   d:open(callback)
+  d.getsInput = getsInput
   d.drawable = drawable
   Dialog.currentDialog = d
   return d
@@ -44,6 +45,20 @@ function Dialog:open(callback)
   Dialog.currentDialog = self
   self.board:open()
   self.state = 'opened'
+end
+
+function Dialog:addMessage(message,shift)
+
+	local woShift = "`1234567890-=qwertyuiop[]\asdfghjkl;zxcvbnm,./"
+	local wShift = "~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:ZXCVBNM<>?"
+
+	if message=="backspace" then
+		self.messages[#self.messages]=string.sub(self.messages[#self.messages], 0,  #self.messages[#self.messages]-1)
+	elseif message=="shift" then
+		 --catch that
+	else
+		self.messages[#self.messages]=self.messages[#self.messages] .. tostring(message)
+	end
 end
 
 function Dialog:reposition()
@@ -81,7 +96,7 @@ function Dialog:message()
   end
 end
 
-function Dialog:draw()
+function Dialog:draw(selected)
     if self.board.state == 'closed' then
         return
     end
@@ -89,7 +104,7 @@ function Dialog:draw()
     local font = love.graphics.getFont()
     font:setLineHeight(1.3)
 
-    x, y = self.board:draw(self.x, self.y)
+    x, y = self.board:draw(self.x, self.y, selected)
 
     if self.board.state == 'opened' then
         local message = self:message()
@@ -121,7 +136,7 @@ function Dialog:keypressed( button )
         elseif self.line ~= #self.messages then
             self.cursor = 0
             self.line = self.line + 1
-        else
+        elseif self.getInput==false or self.getInput == nil then
             self.board:close()
             self.state = 'closing'
         end

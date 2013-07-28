@@ -65,7 +65,7 @@ function Board:update(dt)
     end
 end
 
-function Board:draw(x, y)
+function Board:draw(x, y, selected)
     if self.state == 'closed' then
         return
     end
@@ -75,9 +75,13 @@ function Board:draw(x, y)
     local halfWidth = math.floor(self.width / 2)
     local halfHeight = math.floor(self.height / 2)
 
-    love.graphics.setColor( 0, 0, 0, 255 )
+	love.graphics.setColor( 0, 0, 0, 255 )
     love.graphics.rectangle('fill', x - halfWidth, y - halfHeight, width, height)
-    love.graphics.setColor( 112, 28, 114, 255 )
+	if selected then
+		love.graphics.setColor( 255, 255, 0, 255 )
+	else
+		love.graphics.setColor( 112, 28, 114, 255 )
+	end
     love.graphics.rectangle('line', x - halfWidth, y - halfHeight, width, height)
     love.graphics.setColor( 255, 255, 255, 255 )
     love.graphics.draw(corner, x - halfWidth - 3, y - halfHeight - 3)

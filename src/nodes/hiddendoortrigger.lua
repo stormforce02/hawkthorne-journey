@@ -64,9 +64,10 @@ function HiddenDoorTrigger:keypressed( button, player )
             self.fixed = result == 'Yes'
             Timer.add(2, function() self.fixed = false end)
             self.prompt = nil
-        end)
-    end
-
+        end, {'Yes', 'No'})
+		self.prompt.getsInput=false
+		self.prompt.selected = 0
+	end
     if self.prompt then
         return self.prompt:keypressed( button )
     end

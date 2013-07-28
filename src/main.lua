@@ -189,9 +189,9 @@ function love.keypressed(key)
   if key == "f6" and debugger.on then debug.debug() end
   local button = controls.getButton(key)
 
-  if not button then return end
+  --if not button then return end
   if Prompt.currentPrompt then
-    Prompt.currentPrompt:keypressed(button)
+    Prompt.currentPrompt:keypressed(button,key)
   elseif Dialog.currentDialog then
     Dialog.currentDialog:keypressed(button)
   else

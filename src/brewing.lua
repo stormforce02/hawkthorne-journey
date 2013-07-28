@@ -138,7 +138,7 @@ function state:brew( potion )
             mode='once'
             }
         })
-    self.prompt = Prompt.new(message, callback, options, node)
+    self.prompt = Prompt.new(message, callback, options, node, false)
 end
 
 function state:check()
