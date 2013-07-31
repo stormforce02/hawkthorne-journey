@@ -21,7 +21,7 @@ return {
     },
     materials = {
         {"leaf",30,30},
-		{"paper",30,30},
+		{"paper",1,300},
         {"rock",30,20},
         {"stone",30,35},
         {"stick",30,15},

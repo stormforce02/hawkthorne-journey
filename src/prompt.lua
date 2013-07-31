@@ -48,6 +48,7 @@ function Prompt:update(dt)
         Prompt.currentPrompt = nil
         self.callback(self.options[self.selected])
     end
+	if self.selected==0 then self.selected = #self.options end
 end
 
 function Prompt:draw()
@@ -126,7 +127,7 @@ function Prompt:keypressed( button, key )
         return true
 	elseif (button == 'INTERACT' or button == 'JUMP') and self.options[self.selected]~="" then
 	
-		local closeOn = {'Exit', 'Cancel', 'Save', 'Yes', 'No'}
+		local closeOn = {'Exit', 'Cancel', 'Save', 'Yes', 'No','Finish Note', 'Erase Note'}
 		
 		for i, v in ipairs(closeOn) do
 			if self.options[self.selected] == v then

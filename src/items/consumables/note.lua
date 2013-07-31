@@ -11,29 +11,31 @@ self = {
     use = function( consumable, player )
 		player.freeze = true
 		player.invulnerable = true
-    local message = {}
-	local options = {}
-	if self.content == nil then
-		message={"What would you like to write?\n "}
-		options={'On-screen Keyboard', 'Finish Note', 'Exit', ''}
-	else
-	message={"This note reads... \n"..self.content}
-	options={'Erase Note', 'Exit'}
-	end
-    local callback = function(result)
-		if self.content == nil and prompt.input ~="" and prompt.input ~=nil then
-			self.content=prompt.input
+		local message = {}
+		local options = {}
+		if self.content == nil then
+			message={"What would you like to write?\n "}
+			options={'On-screen Keyboard', 'Finish Note', 'Exit', ''}
+		else
+			message={"This note reads... \n"..self.content}
+			options={'Erase Note', 'Exit'}
 		end
-         prompt = nil
-         player.freeze = false
-         player.invulnerable = false
-    end
-	prompt = Prompt.new(message, callback, options, nil, self.content==nil)
+		local callback = function(result)
+			if prompt.message == "What would you like to write?\n " then
+				if prompt.selected == 2 then self.content = prompt.input
+				elseif prompt.selected == 3 then self.content = nil end
+			else
+				if prompt.selected == 1 then self.content = nil end
+			end
+		end
+		prompt = nil
+		player.freeze = false
+		player.invulnerable = false
+		prompt = Prompt.new(message, callback, options, nil, true)
 		
-    local itemNode = require('items/consumables/note')
-    local item = Item.new(itemNode)
-    player.inventory:addItem(item)
+		local itemNode = require('items/consumables/note')
+		local item = Item.new(itemNode)
+		player.inventory:addItem(item)
     end
 }
-
 return self

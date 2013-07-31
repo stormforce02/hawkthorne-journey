@@ -13,6 +13,7 @@ function Dialog.new(message, callback, drawable,  getInput)
   d:reposition()
   d:open(callback)
   d.getsInput = getsInput
+  d.input=""
   d.drawable = drawable
   Dialog.currentDialog = d
   return d
@@ -53,11 +54,11 @@ function Dialog:addMessage(message,shift)
 	local wShift = "~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:ZXCVBNM<>?"
 
 	if message=="backspace" then
-		self.messages[#self.messages]=string.sub(self.messages[#self.messages], 0,  #self.messages[#self.messages]-1)
+		self.input=string.sub(self.input, 0,  #self.input-1)
 	elseif message=="shift" then
 		 --catch that
 	else
-		self.messages[#self.messages]=self.messages[#self.messages] .. tostring(message)
+		self.input=self.input .. tostring(message)
 	end
 end
 
@@ -90,9 +91,9 @@ end
 function Dialog:message()
   local long = self.messages[self.line]
   if math.floor(self.cursor) >= long:len() then
-    return long .. (self.blink > .25 and "^" or "")
+    return long .. self.input .. (self.blink > .25 and "^" or "")
   else
-    return string.sub(long, 1, math.floor(self.cursor))
+    return string.sub(long .. self.input, 1, math.floor(self.cursor))
   end
 end
 
